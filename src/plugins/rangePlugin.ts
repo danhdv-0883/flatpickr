@@ -70,6 +70,12 @@ function rangePlugin(config: Config = {}): Plugin {
         fp.open();
       });
 
+      fp._bind(secondInput, ["blur"], () => {
+        if (fp._input.value === "") {
+          secondInput.value = "";
+        }
+      });
+
       if (fp.config.allowInput)
         fp._bind(secondInput, "keydown", (e: KeyboardEvent) => {
           if ((e as KeyboardEvent).key === "Enter") {
@@ -145,6 +151,11 @@ function rangePlugin(config: Config = {}): Plugin {
             secondInput.value = "";
             _prevDates = [];
           }, 10);
+        }
+
+        console.log(fp);
+        if (fp.selectedDates.length === 1 && secondInput.value === "") {
+          _secondInputFocused = true;
         }
 
         if (_secondInputFocused) {
