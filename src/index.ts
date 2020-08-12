@@ -1074,6 +1074,34 @@ function FlatpickrInstance(
 
     buildMonths();
 
+    let buttonLeft = createElement<HTMLDivElement>("div", "btn-prev-year");
+    let buttonIconLeft = document.createElement("svg");
+    buttonIconLeft.classList.add("minicon");
+    buttonIconLeft.classList.add("arrowDown");
+    let buttonUse = document.createElement("use");
+    buttonUse.setAttribute(
+      "xlink:href",
+      "images/sprite.svg#icon-chevron-double-left"
+    );
+    buttonIconLeft.appendChild(buttonUse);
+    buttonLeft.appendChild(buttonIconLeft);
+
+    let buttonRight = createElement<HTMLDivElement>("div", "btn-next-year");
+    let buttonIconRight = document.createElement("svg");
+    buttonIconRight.classList.add("minicon");
+    buttonIconRight.classList.add("arrowUp");
+    let buttonUseRight = document.createElement("use");
+    buttonUseRight.setAttribute(
+      "xlink:href",
+      "images/sprite.svg#icon-chevron-double-right"
+    );
+
+    buttonIconRight.appendChild(buttonUseRight);
+    buttonRight.appendChild(buttonIconRight);
+
+    self.monthNav.appendChild(buttonLeft);
+    self.monthNav.appendChild(buttonRight);
+
     Object.defineProperty(self, "_hidePrevMonthArrow", {
       get: () => self.__hidePrevMonthArrow,
       set(bool: boolean) {
@@ -2161,7 +2189,9 @@ function FlatpickrInstance(
       (configPosHorizontal != null && configPosHorizontal === "center"
         ? (calendarWidth - inputBounds.width) / 2
         : 0);
-    const right = window.document.body.offsetWidth - (window.pageXOffset + inputBounds.right);
+    const right =
+      window.document.body.offsetWidth -
+      (window.pageXOffset + inputBounds.right);
     const rightMost = left + calendarWidth > window.document.body.offsetWidth;
     const centerMost = right + calendarWidth > window.document.body.offsetWidth;
 
