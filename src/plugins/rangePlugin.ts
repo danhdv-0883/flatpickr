@@ -160,6 +160,14 @@ function rangePlugin(config: Config = {}): Plugin {
             secondInput.parentNode.removeChild(secondInput);
       },
 
+       // clear history
+      onClose() {
+        if (!fp._input.value && !secondInput.value) {
+          fp.selectedDates = [];
+          _prevDates = [];
+        }
+      },
+
       onValueUpdate(selDates: Date[]) {
         if (!secondInput) return;
 
